@@ -18,6 +18,8 @@ import NavBar from './pages/shared/NavBar';
 import NotFound from './pages/shared/NotFound';
 import RequireAuth from './pages/shared/RequireAuth';
 
+
+
 function App() {
   return (
     <div className="App">
