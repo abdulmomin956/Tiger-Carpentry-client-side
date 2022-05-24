@@ -1,14 +1,23 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
 import logo from '../../images/logo.png'
+import { signOut } from 'firebase/auth';
 
 const NavBar = () => {
+    const [user, loading, error] = useAuthState(auth);
     const menuItem = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/dashboard'>Dashboard</Link></li>
         <li><Link to='/blogs'>Blogs</Link></li>
         <li><Link to='/portfolio'>My Portfolio</Link></li>
-        <li><Link to='/login'>Login</Link></li>
+        {
+            !user ?
+                <li><Link to='/login'>Login</Link></li> :
+                <li><p onClick={() => signOut(auth)}>Log Out</p></li>
+        }
+
     </>
     // const dropMenu = <>
     //     <li tabindex="0">

@@ -1,10 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SocialLogin from './SocialLogin';
+import { useForm } from "react-hook-form";
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+
 
 const Register = () => {
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
+
+    const [updateProfile, updating, upError] = useUpdateProfile(auth);
+
+
+    const { register, handleSubmit } = useForm();
+    const onSubmit = async data => {
+        await createUserWithEmailAndPassword(data.email, data.password);
+        await updateProfile({ displayName: data.name });
+    };
+    console.log(user);
     return (
-        <div class="hero min-h-screen bg-base-200">
+        <form onSubmit={handleSubmit(onSubmit)} class="hero min-h-screen bg-base-200">
             <div class="hero-content flex-col w-full md:w-1/2">
                 <div class="text-center lg:text-left">
                     <h1 class="text-5xl font-bold">Sign Up</h1>
@@ -15,22 +35,22 @@ const Register = () => {
                             <label class="label">
                                 <span class="label-text">Name</span>
                             </label>
-                            <input type="text" placeholder="email" class="input input-bordered" />
+                            <input {...register("name")} type="text" placeholder="name" class="input input-bordered" />
                         </div>
                         <div class="form-control">
                             <label class="label">
                                 <span class="label-text">Email</span>
                             </label>
-                            <input type="email" placeholder="email" class="input input-bordered" />
+                            <input {...register("email")} type="email" placeholder="email" class="input input-bordered" />
                         </div>
                         <div class="form-control">
                             <label class="label">
                                 <span class="label-text">Password</span>
                             </label>
-                            <input type="password" placeholder="password" class="input input-bordered" />
+                            <input {...register("password")} type="password" placeholder="password" class="input input-bordered" />
                         </div>
                         <div class="form-control mt-6">
-                            <button class="btn btn-primary">Sign Up</button>
+                            <button type='submit' class="btn btn-primary">Sign Up</button>
                         </div>
                         <div className="form-control">
                             <div className="divider">Or</div>
@@ -42,7 +62,7 @@ const Register = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     );
 };
 
