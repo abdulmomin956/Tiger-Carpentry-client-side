@@ -28,13 +28,13 @@ const Login = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="hero min-h-screen bg-base-200">
+        <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col w-full md:w-1/2">
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Login</h1>
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <div className="card-body">
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body pb-0">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -53,6 +53,9 @@ const Login = () => {
                         <div className="form-control mt-6">
                             <button type='submit' className="btn btn-primary">Login</button>
                         </div>
+
+                    </form>
+                    <div className='card-body pt-0'>
                         <div className="form-control">
                             <div className="divider">Or</div>
                             <SocialLogin>Sign In with</SocialLogin>
@@ -63,7 +66,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     );
 };
 

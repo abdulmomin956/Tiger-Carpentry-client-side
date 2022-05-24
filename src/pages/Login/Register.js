@@ -18,18 +18,30 @@ const Register = () => {
 
 
     const { register, handleSubmit } = useForm();
+
     const onSubmit = async data => {
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
+        const newUser = { email: data.email }
+        fetch('http://localhost:5000/users', {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newUser)
+        })
+            .then(res => res.json())
+            .then(result => console.log(result))
     };
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="hero min-h-screen bg-base-200">
+
+        <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col w-full md:w-1/2">
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Sign Up</h1>
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <div className="card-body">
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body pb-0">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Name</span>
@@ -51,6 +63,8 @@ const Register = () => {
                         <div className="form-control mt-6">
                             <button type='submit' className="btn btn-primary">Sign Up</button>
                         </div>
+                    </form>
+                    <div className="card-body pt-0">
                         <div className="form-control">
                             <div className="divider">Or</div>
                             <SocialLogin>Continue With</SocialLogin>
@@ -61,7 +75,7 @@ const Register = () => {
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     );
 };
 

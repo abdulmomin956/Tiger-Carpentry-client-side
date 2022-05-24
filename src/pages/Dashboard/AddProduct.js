@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 const AddProduct = () => {
     const { register, handleSubmit } = useForm();
     const [image, setImage] = useState('')
+    const [err, setErr] = useState('')
     const onSubmit = async data => {
         // for img upload
         const formData = new FormData();
@@ -27,6 +28,9 @@ const AddProduct = () => {
                     })
                         .then(res => res.json())
                         .then(data => console.log(data))
+                }
+                else {
+                    setErr('Please select a valid image file')
                 }
 
             })
@@ -95,6 +99,11 @@ const AddProduct = () => {
                                 m-0
                                 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" />
                         </div>
+                        {
+                            err ? <label className="label">
+                                <span className="label-text text-red-600">{err}</span>
+                            </label> : ''
+                        }
                         <div className="form-control mt-6">
                             <button type='submit' className="btn btn-primary">Add Product</button>
                         </div>
