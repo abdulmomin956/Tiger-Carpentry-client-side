@@ -1,56 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const AddProduct = () => {
     const { register, handleSubmit } = useForm();
+    const [image, setImage] = useState('')
     const onSubmit = async data => {
-        // await createUserWithEmailAndPassword(data.email, data.password);
-        // await updateProfile({ displayName: data.name });
+        // for img upload
+        const formData = new FormData();
+        formData.append('image', data.image[0]);
+        await fetch('https://api.imgbb.com/1/upload?key=31f7cb9f34e2ffbef2d717a4a4236371', {
+            method: "POST",
+            body: formData
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    setImage(result.data.url)
+                    data.image = image;
+                    fetch('http://localhost:5000/products', {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                        ,
+                        body: JSON.stringify(data)
+                    })
+                        .then(res => res.json())
+                        .then(data => console.log(data))
+                }
+
+            })
+
+
+        // console.log(data.image[0].name);
+        //mongodb post
+
     };
     return (
-        <form onSubmit={handleSubmit(onSubmit)} class="hero min-h-screen bg-base-200">
-            <div class="hero-content flex-col w-full md:w-1/2">
-                <div class="text-center lg:text-left">
-                    <h1 class="text-5xl font-bold">Add A Product</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="hero min-h-screen bg-base-200">
+            <div className="hero-content flex-col w-full md:w-1/2">
+                <div className="text-center lg:text-left">
+                    <h1 className="text-5xl font-bold">Add A Product</h1>
                 </div>
-                <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <div class="card-body">
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Product Name</span>
+                <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                    <div className="card-body">
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Product Name</span>
                             </label>
-                            <input {...register("name")} type="text" placeholder="Product Name" class="input input-bordered" />
+                            <input {...register("name")} type="text" placeholder="Product Name" className="input input-bordered" />
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Short Description</span>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Short Description</span>
                             </label>
-                            <textarea {...register("short")} type="text" placeholder="Short Description" class="input input-bordered h-24 p-3 border rounded-lg" />
+                            <textarea {...register("short")} type="text" placeholder="Short Description" className="input input-bordered h-24 p-3 border rounded-lg" />
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Minimum Order</span>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Minimum Order</span>
                             </label>
-                            <input {...register("minOrder")} type="number" placeholder="Minimum Order" class="input input-bordered" />
+                            <input {...register("minOrder")} type="number" placeholder="Minimum Order" className="input input-bordered" />
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Quantity</span>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Quantity</span>
                             </label>
-                            <input {...register("availableQty")} type="number" placeholder="Quantity" class="input input-bordered" />
+                            <input {...register("availableQty")} type="number" placeholder="Quantity" className="input input-bordered" />
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Unit Price</span>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Unit Price</span>
                             </label>
-                            <input {...register("price")} type="number" placeholder="price" class="input input-bordered" />
+                            <input {...register("price")} type="number" placeholder="price" className="input input-bordered" />
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Image</span>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Image</span>
                             </label>
                             <input  {...register("image")} type="file" accept=".png, .jpg, .jpeg"
-                                class="
+                                className="
                                 input input-bordered block
                                 w-full
                                 px-2
@@ -66,8 +95,8 @@ const AddProduct = () => {
                                 m-0
                                 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" />
                         </div>
-                        <div class="form-control mt-6">
-                            <button type='submit' class="btn btn-primary">Add Product</button>
+                        <div className="form-control mt-6">
+                            <button type='submit' className="btn btn-primary">Add Product</button>
                         </div>
                     </div>
                 </div>

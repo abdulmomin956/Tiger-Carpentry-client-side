@@ -22,33 +22,40 @@ const NavBar = () => {
 
     </>
     // const dropMenu = <>
-    //     <li tabindex="0">
-    //         <a class="justify-between">
+    //     <li tabIndex="0">
+    //         <a className="justify-between">
     //             Parent
-    //             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+    //             <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
     //         </a>
-    //         <ul class="p-2">
+    //         <ul className="p-2">
     //             {menuItem}
     //         </ul>
     //     </li>
     // </>
     return (
-        <div class="navbar bg-base-100 w-full lg:px-40">
-            <div class="navbar-start">
-                <div class="dropdown">
-                    <label tabindex="0" class="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+        <div className="navbar bg-base-100 w-full lg:px-40">
+            <div className="navbar-start">
+                <div className="dropdown">
+                    <label tabIndex="0" className="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
-                    <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                    <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         {menuItem}
                     </ul>
                 </div>
                 <Link to='/'><img className='w-1/3' src={logo} alt="Home" /></Link>
             </div>
-            <div class="navbar-end hidden lg:flex">
-                <ul class="menu menu-horizontal p-0">
+            <div className="navbar-end hidden lg:flex">
+                <ul className="menu menu-horizontal p-0">
                     {menuItem}
                 </ul>
+            </div>
+            <div className="navbar-end lg:hidden">
+                <label htmlFor="my-drawer-2" className=" bg-white   lg:hidden">
+
+                    <svg className=" fill-secondary" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" /></svg>
+
+                </label>
             </div>
         </div>
     );

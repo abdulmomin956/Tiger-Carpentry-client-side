@@ -23,39 +23,39 @@ const Register = () => {
         await updateProfile({ displayName: data.name });
     };
     return (
-        <form onSubmit={handleSubmit(onSubmit)} class="hero min-h-screen bg-base-200">
-            <div class="hero-content flex-col w-full md:w-1/2">
-                <div class="text-center lg:text-left">
-                    <h1 class="text-5xl font-bold">Sign Up</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="hero min-h-screen bg-base-200">
+            <div className="hero-content flex-col w-full md:w-1/2">
+                <div className="text-center lg:text-left">
+                    <h1 className="text-5xl font-bold">Sign Up</h1>
                 </div>
-                <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <div class="card-body">
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Name</span>
+                <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                    <div className="card-body">
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Name</span>
                             </label>
-                            <input {...register("name")} type="text" placeholder="name" class="input input-bordered" />
+                            <input {...register("name")} type="text" placeholder="name" className="input input-bordered" />
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Email</span>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Email</span>
                             </label>
-                            <input {...register("email")} type="email" placeholder="email" class="input input-bordered" />
+                            <input {...register("email")} type="email" placeholder="email" className="input input-bordered" />
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Password</span>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Password</span>
                             </label>
-                            <input {...register("password")} type="password" placeholder="password" class="input input-bordered" />
+                            <input {...register("password")} type="password" placeholder="password" className="input input-bordered" />
                         </div>
-                        <div class="form-control mt-6">
-                            <button type='submit' class="btn btn-primary">Sign Up</button>
+                        <div className="form-control mt-6">
+                            <button type='submit' className="btn btn-primary">Sign Up</button>
                         </div>
                         <div className="form-control">
                             <div className="divider">Or</div>
                             <SocialLogin>Continue With</SocialLogin>
-                            <label class="label">
-                                <p>Have an account? <Link to='/login' class="text-primary link link-hover">Login</Link></p>
+                            <label className="label">
+                                <p>Have an account? <Link to='/login' className="text-primary link link-hover">Login</Link></p>
                             </label>
                         </div>
                     </div>
