@@ -15,6 +15,7 @@ import Register from './pages/Login/Register';
 import Portfolio from './pages/Portfolio/Portfolio';
 import Purchase from './pages/Purchase/Purchase';
 import NavBar from './pages/shared/NavBar';
+import NotFound from './pages/shared/NotFound';
 import RequireAuth from './pages/shared/RequireAuth';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <Route path='/portfolio' element={<Portfolio />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
+        <Route path='*' element={<NotFound />}></Route>
       </Routes>
     </div>
   );
