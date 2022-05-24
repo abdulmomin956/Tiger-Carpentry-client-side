@@ -22,7 +22,6 @@ const Register = () => {
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
     };
-    console.log(user);
     return (
         <form onSubmit={handleSubmit(onSubmit)} class="hero min-h-screen bg-base-200">
             <div class="hero-content flex-col w-full md:w-1/2">
