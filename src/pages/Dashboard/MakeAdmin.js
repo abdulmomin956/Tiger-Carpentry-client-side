@@ -3,33 +3,46 @@ import { useQuery } from 'react-query';
 import LoadSpinner from '../shared/LoadSpinner';
 
 const MakeAdmin = () => {
-    const { isLoading, error, data } = useQuery('users', () =>
+    const { isLoading, error, data, refetch } = useQuery('users', () =>
         fetch('http://localhost:5000/users').then(res =>
             res.json()
         )
     )
     if (isLoading) return <LoadSpinner></LoadSpinner>
-    console.log(data);
+
+    const handleAdmin = email => {
+        fetch(`http://localhost:5000/users/${email}`, {
+            method: 'PATCH'
+        })
+            .then(res => res.json())
+            .then(result => {
+                refetch()
+                console.log(result)
+            })
+    }
+
     return (
-        <div className="overflow-x-auto">
-            <table className="table w-full">
+        <div className="overflow-x-auto w-full border">
+            <table className="table table-compact w-full">
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>S/L</th>
                         <th>Name</th>
-                        <th>Job</th>
-                        <th>Favorite Color</th>
+                        <th>Role</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     {
                         data.map((user, index) =>
-                            <tr>
+                            <tr key={index}>
                                 <th>{index + 1}</th>
                                 <td>{user.email}</td>
-                                <td>Quality Control Specialist</td>
-                                <td>Blue</td>
+                                <td>{
+                                    !user.role && <button onClick={() => handleAdmin(user.email)} className='btn btn-primary'>Make Admin</button>
+                                }</td>
+                                <td><button className='btn btn-primary'>Delete</button></td>
                             </tr>
                         )
                     }
