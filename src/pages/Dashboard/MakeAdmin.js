@@ -1,6 +1,8 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import LoadSpinner from '../shared/LoadSpinner';
+import NotFound from '../shared/NotFound';
+import RequireAdmin from '../shared/RequireAdmin';
 
 const MakeAdmin = () => {
     const { isLoading, error, data, refetch } = useQuery('users', () =>
