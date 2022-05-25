@@ -18,8 +18,8 @@ import Login from './pages/Login/Login';
 import Register from './pages/Login/Register';
 import Portfolio from './pages/Portfolio/Portfolio';
 import Purchase from './pages/Purchase/Purchase';
-import LoadSpinner from './pages/shared/LoadSpinner';
 import NavBar from './pages/shared/NavBar';
+import NotAdmin from './pages/shared/NotAdmin';
 import NotFound from './pages/shared/NotFound';
 import RequireAdmin from './pages/shared/RequireAdmin';
 import RequireAuth from './pages/shared/RequireAuth';
@@ -61,7 +61,11 @@ function App() {
           {
             !userDat?.data?.role === 'admin' && <Route path='/dashboard/' element={<MyOrders></MyOrders>}></Route>
           }
-          <Route path='/dashboard/add-review' element={<AddReview></AddReview>}></Route>
+          <Route path='/dashboard/add-review' element={
+            <NotAdmin userDat={userDat} fireDat={loading}>
+              <AddReview></AddReview>
+            </NotAdmin>
+          }></Route>
           <Route path='/dashboard/my-profile' element={<MyProfile />}></Route>
           {
             userDat?.data?.role === 'admin' && <Route path='/dashboard/' element={

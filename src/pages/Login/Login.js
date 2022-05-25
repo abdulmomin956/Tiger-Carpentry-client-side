@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useToken from '../hooks/useToken';
+import LoadSpinner from '../shared/LoadSpinner';
 import SocialLogin from './SocialLogin';
 
 const Login = () => {
+    const { register, handleSubmit } = useForm();
     const [
         signInWithEmailAndPassword,
         user,
@@ -13,18 +16,26 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    const [token] = useToken(user)
+
     let navigate = useNavigate();
     let location = useLocation();
 
     let from = location.state?.from?.pathname || "/";
 
-    if (user) {
-        navigate(from, { replace: true });
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+    }, [from, navigate, token])
+
+    if (loading) {
+        return <LoadSpinner></LoadSpinner>
     }
 
-    const { register, handleSubmit } = useForm();
     const onSubmit = async data => {
         await signInWithEmailAndPassword(data.email, data.password);
+
     };
 
     return (
@@ -39,7 +50,16 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input {...register("email")} type="text" placeholder="email" className="input input-bordered" />
+                            <input {...register("email", {
+                                required: {
+                                    value: true,
+                                    message: 'Email is Required'
+                                },
+                                pattern: {
+                                    value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                                    message: 'Provide a valid Email'
+                                }
+                            })} type="text" placeholder="email" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">

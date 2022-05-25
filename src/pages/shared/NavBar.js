@@ -18,7 +18,10 @@ const NavBar = () => {
         {
             !user ?
                 <li><Link to='/login'>Login</Link></li> :
-                <li><p onClick={() => signOut(auth)}>Log Out</p></li>
+                <li><p onClick={() => {
+                    signOut(auth)
+                    localStorage.removeItem('accessToken');
+                }}>Log Out</p></li>
         }
 
     </>

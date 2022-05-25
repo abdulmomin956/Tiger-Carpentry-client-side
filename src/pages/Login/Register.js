@@ -1,9 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from './SocialLogin';
 import { useForm } from "react-hook-form";
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import useToken from '../hooks/useToken';
 
 
 const Register = () => {
@@ -14,6 +15,19 @@ const Register = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
 
+    const [token] = useToken(user);
+
+    let navigate = useNavigate();
+    let location = useLocation();
+
+    let from = location.state?.from?.pathname || "/";
+
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+    }, [from, navigate, token])
+
     const [updateProfile, updating, upError] = useUpdateProfile(auth);
 
 
@@ -22,16 +36,7 @@ const Register = () => {
     const onSubmit = async data => {
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
-        const newUser = { email: data.email }
-        fetch('http://localhost:5000/users', {
-            method: 'PUT',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newUser)
-        })
-            .then(res => res.json())
-            .then(result => console.log(result))
+
     };
     return (
 

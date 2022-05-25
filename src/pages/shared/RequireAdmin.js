@@ -1,8 +1,7 @@
 import React from 'react';
-import LoadSpinner from './LoadSpinner';
 import NotFound from './NotFound';
 
-const RequireAdmin = ({ userDat, fireDat, children }) => {
+const RequireAdmin = ({ userDat, children }) => {
 
 
     // if (fireDat.loading || userDat.isLoading) {
