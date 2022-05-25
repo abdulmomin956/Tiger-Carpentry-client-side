@@ -10,7 +10,9 @@ const MakeAdmin = () => {
             res.json()
         )
     )
-    if (isLoading) return <LoadSpinner></LoadSpinner>
+    if (isLoading) return <div className='h-screen flex justify-center items-center'>
+        <LoadSpinner></LoadSpinner>
+    </div>
 
     const handleAdmin = email => {
         fetch(`http://localhost:5000/users/${email}`, {

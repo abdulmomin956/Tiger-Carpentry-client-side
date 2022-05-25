@@ -7,6 +7,7 @@ import { signOut } from 'firebase/auth';
 
 const NavBar = () => {
     const [user, loading, error] = useAuthState(auth);
+
     const menuItem = <>
         <li><Link to='/'>Home</Link></li>
         {

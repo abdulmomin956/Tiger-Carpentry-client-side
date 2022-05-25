@@ -1,5 +1,9 @@
+import { getAdditionalUserInfo } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import auth from './firebase.init';
 import Blogs from './pages/Blogs/Blogs';
 import AddProduct from './pages/Dashboard/AddProduct';
 import AddReview from './pages/Dashboard/AddReview';
@@ -14,6 +18,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Login/Register';
 import Portfolio from './pages/Portfolio/Portfolio';
 import Purchase from './pages/Purchase/Purchase';
+import LoadSpinner from './pages/shared/LoadSpinner';
 import NavBar from './pages/shared/NavBar';
 import NotFound from './pages/shared/NotFound';
 import RequireAdmin from './pages/shared/RequireAdmin';
@@ -22,6 +27,24 @@ import RequireAuth from './pages/shared/RequireAuth';
 
 
 function App() {
+  const [user, loading, error] = useAuthState(auth);
+  const isTrue = !!user;
+  console.log(isTrue);
+
+  const userDat = useQuery(['users', user?.email], () => fetch(`http://localhost:5000/users/${user?.email}`)
+    .then(res => res.json())
+    , { enabled: isTrue }
+  )
+  // if (!userDat.isSuccess) {
+  //   userDat.refetch()
+  // }
+
+  // if (loading || userDat.isLoading) {
+  //   return <LoadSpinner></LoadSpinner>
+  // }
+
+
+  // console.log(userDat);
   return (
     <div className="App">
       <NavBar></NavBar>
@@ -30,31 +53,35 @@ function App() {
         <Route path='/purchase' element={<Purchase />}></Route>
         <Route path='/dashboard' element={
           <RequireAuth>
-            <Dashboard >
+            <Dashboard userData={userDat}>
             </Dashboard>
           </RequireAuth>
         }>
 
-          <Route path='/dashboard/' element={<MyOrders></MyOrders>}></Route>
+          {
+            !userDat?.data?.role === 'admin' && <Route path='/dashboard/' element={<MyOrders></MyOrders>}></Route>
+          }
           <Route path='/dashboard/add-review' element={<AddReview></AddReview>}></Route>
           <Route path='/dashboard/my-profile' element={<MyProfile />}></Route>
-          <Route path='/dashboard/manage-orders' element={
-            <RequireAdmin>
-              <ManageOrders />
-            </RequireAdmin>
-          }></Route>
+          {
+            userDat?.data?.role === 'admin' && <Route path='/dashboard/' element={
+              <RequireAdmin userDat={userDat} fireDat={loading}>
+                <ManageOrders />
+              </RequireAdmin>
+            }></Route>
+          }
           <Route path='/dashboard/add-product' element={
-            <RequireAdmin>
+            <RequireAdmin userDat={userDat} fireDat={loading}>
               <AddProduct />
             </RequireAdmin>
           }></Route>
           <Route path='/dashboard/make-admin' element={
-            <RequireAdmin>
+            <RequireAdmin userDat={userDat} fireDat={loading}>
               <MakeAdmin />
             </RequireAdmin>
           }></Route>
           <Route path='/dashboard/manage-products' element={
-            <RequireAdmin>
+            <RequireAdmin userDat={userDat} fireDat={loading}>
               <ManageProducts />
             </RequireAdmin>
           }></Route>
