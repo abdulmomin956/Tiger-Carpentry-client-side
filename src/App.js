@@ -17,6 +17,7 @@ import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Login/Register';
 import Portfolio from './pages/Portfolio/Portfolio';
+import Payment from './pages/Purchase/Payment';
 import PlacedSuccess from './pages/Purchase/PlacedSuccess';
 import Purchase from './pages/Purchase/Purchase';
 import NavBar from './pages/shared/NavBar';
@@ -55,6 +56,11 @@ function App() {
         <Route path='/purchase-success' element={
           <RequireAuth>
             <PlacedSuccess></PlacedSuccess>
+          </RequireAuth>
+        }></Route>
+        <Route path='/payment/:id' element={
+          <RequireAuth>
+            <Payment user={user} />
           </RequireAuth>
         }></Route>
         <Route path='/purchase/:id' element={
