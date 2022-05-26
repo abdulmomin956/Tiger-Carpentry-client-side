@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const AddProduct = () => {
-    const { register, handleSubmit } = useForm();
-    const [image, setImage] = useState('')
+    const { register, handleSubmit, reset } = useForm();
     const [err, setErr] = useState('')
     const onSubmit = async data => {
         // for img upload
@@ -16,18 +15,30 @@ const AddProduct = () => {
             .then(res => res.json())
             .then(result => {
                 if (result.success) {
-                    setImage(result.data.url)
-                    data.image = image;
+                    const img = result.data.url;
+                    const product = {
+                        name: data.name,
+                        short: data.short,
+                        minOrder: data.minOrder,
+                        availableQty: data.availableQty,
+                        price: data.price,
+                        image: img
+
+                    }
                     fetch('http://localhost:5000/products', {
                         method: "POST",
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
                         }
                         ,
-                        body: JSON.stringify(data)
+                        body: JSON.stringify(product)
                     })
                         .then(res => res.json())
-                        .then(data => console.log(data))
+                        .then(data => {
+                            console.log(data)
+                            reset();
+                        })
                 }
                 else {
                     setErr('Please select a valid image file')
@@ -68,7 +79,7 @@ const AddProduct = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Quantity</span>
+                                <span className="label-text">Available Quantity</span>
                             </label>
                             <input {...register("availableQty")} type="number" placeholder="Quantity" className="input input-bordered" />
                         </div>

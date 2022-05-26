@@ -28,8 +28,9 @@ import RequireAuth from './pages/shared/RequireAuth';
 
 function App() {
   const [user, loading, error] = useAuthState(auth);
+  // console.log(user);
   const isTrue = !!user;
-  console.log(isTrue);
+  // console.log(isTrue);
 
   const userDat = useQuery(['users', user?.email], () => fetch(`http://localhost:5000/users/${user?.email}`)
     .then(res => res.json())
@@ -50,7 +51,11 @@ function App() {
       <NavBar></NavBar>
       <Routes>
         <Route path='/' element={<Home />}></Route>
-        <Route path='/purchase' element={<Purchase />}></Route>
+        <Route path='/purchase/:id' element={
+          <RequireAuth>
+            <Purchase user={user} />
+          </RequireAuth>
+        }></Route>
         <Route path='/dashboard' element={
           <RequireAuth>
             <Dashboard userData={userDat}>
