@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 import LoadSpinner from '../shared/LoadSpinner';
 
 const Dashboard = ({ userData }) => {
-    console.log(userData);
+    // console.log(userData);
 
     // const { userDat } = props;
     if (userData?.isLoading) {
@@ -17,7 +17,7 @@ const Dashboard = ({ userData }) => {
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col items-center justify-start">
                 {/* <!-- Page content here --> */}
-                <Outlet />
+                <Outlet hello='hello' />
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>

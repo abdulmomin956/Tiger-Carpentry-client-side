@@ -70,7 +70,7 @@ function App() {
         }>
 
           {
-            !userDat?.data?.role === 'admin' && <Route path='/dashboard/' element={<MyOrders></MyOrders>}></Route>
+            userDat?.data?.role !== 'admin' && <Route path='/dashboard/' element={<MyOrders user={user}></MyOrders>}></Route>
           }
           <Route path='/dashboard/add-review' element={
             <NotAdmin userDat={userDat} fireDat={loading}>
