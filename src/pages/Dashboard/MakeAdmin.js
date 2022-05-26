@@ -6,7 +6,12 @@ import RequireAdmin from '../shared/RequireAdmin';
 
 const MakeAdmin = () => {
     const { isLoading, error, data, refetch } = useQuery('users', () =>
-        fetch('http://localhost:5000/users').then(res =>
+        fetch('http://localhost:5000/users', {
+            method: "GET",
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        }).then(res =>
             res.json()
         )
     )
