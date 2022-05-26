@@ -1,64 +1,116 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import LoadSpinner from '../shared/LoadSpinner';
+import PlacedSuccess from './PlacedSuccess';
 
 const Purchase = ({ user }) => {
+    const { register, handleSubmit, reset } = useForm();
     const { id } = useParams();
-    console.log(id);
+    // console.log(id);
     const singlePrData = useQuery('singleProduct', () => fetch(`http://localhost:5000/products/${id}`)
         .then(res => res.json())
     )
+    let navigate = useNavigate();
+    const [success, setSuccess] = useState(false);
 
-    console.log(singlePrData);
+    if (singlePrData.isLoading) {
+        return <LoadSpinner></LoadSpinner>
+    }
+
+    // console.log(singlePrData);
     const { name, short, price, minOrder, availableQty, image } = singlePrData.data;
-    console.log(user.displayName);
+    // console.log(user.displayName);
+
+
+    const onSubmit = async data => {
+        const order = {
+            productImg: image,
+            orderQty: data.orderQty,
+            rate: price,
+            productName: name,
+            name: user.displayName,
+            email: user.email,
+            address: data.address,
+            phone: data.phone
+        }
+        console.log(order);
+        fetch('http://localhost:5000/orders', {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(order)
+        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result)
+                if (result.acknowledged) {
+                    reset();
+                    setSuccess(true);
+                }
+            })
+    };
+    if (success) {
+        return <PlacedSuccess success={success} props='purchase'></PlacedSuccess>
+    }
     return (
-        <div class="hero min-h-screen bg-base-200">
-            <div class="hero-content flex-col ">
-                <div class="text-center lg:text-left">
-                    <h1 class="text-5xl font-bold">Purchase the Product</h1>
+        <div className="hero min-h-screen bg-base-200">
+            <div className="hero-content flex-col ">
+                <div className="text-center lg:text-left">
+                    <h1 className="text-5xl font-bold">Purchase the Product</h1>
                 </div>
-                <div class="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100">
-                    <div class="card-body">
+                <div className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100">
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                         <div className="form-control">
                             <img src={image} alt="" />
                         </div>
-                        <div class="form-control">
+                        <div className="form-control">
 
-                            <h1 class="card-title" >{name}</h1>
-                            <h1 class="" >{short}</h1>
-                            <h1 class="" >Price {price} per piece</h1>
-                            <h1 class="" >Minimum Order: {minOrder} pcs</h1>
-                            <h1 class="" >Available: {availableQty} pcs</h1>
+                            <h1 className="card-title" >{name}</h1>
+                            <h1 className="" >{short}</h1>
+                            <h1 className="" >Price {price} per piece</h1>
+                            <h1 className="" >Minimum Order: {minOrder} pcs</h1>
+                            <h1 className="" >Available: {availableQty} pcs</h1>
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Your Name</span>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Order Quantity</span>
                             </label>
-                            <input type="text" value={user.displayName} disabled class="input input-bordered" />
+                            <input {...register("orderQty")} type="number" min={minOrder} max={availableQty} required defaultValue={minOrder} className="input input-bordered" />
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Your Email</span>
+                        <div className="divider">YOUR INFORMATION</div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Your Name</span>
                             </label>
-                            <input type="text" value={user.email} disabled class="input input-bordered" />
+                            <input type="text" value={user.displayName} disabled className="input input-bordered" />
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Order Quantity</span>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Your Email</span>
                             </label>
-                            <input type="number" min={minOrder} max={availableQty} required placeholder={minOrder} class="input input-bordered" />
+                            <input {...register("email")} type="text" value={user.email} disabled className="input input-bordered" />
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Full Address</span>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Full Address</span>
                             </label>
-                            <input type="text" required placeholder='Full Address' class="input input-bordered" />
+                            <input {...register("address")} type="text" required placeholder='Full Address' className="input input-bordered" />
                         </div>
-                        <div class="form-control mt-6">
-                            <button class="btn btn-primary">Place the Order</button>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Phone Number</span>
+                            </label>
+                            <input {...register("phone")} type="text" required placeholder='Phone Number' className="input input-bordered" />
                         </div>
-                    </div>
+                        <div className="form-control mt-6">
+                            <button className="btn btn-primary">Place the Order</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
