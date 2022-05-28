@@ -20,6 +20,7 @@ import Portfolio from './pages/Portfolio/Portfolio';
 import Payment from './pages/Purchase/Payment';
 import PlacedSuccess from './pages/Purchase/PlacedSuccess';
 import Purchase from './pages/Purchase/Purchase';
+import Footer from './pages/shared/Footer';
 import NavBar from './pages/shared/NavBar';
 import NotAdmin from './pages/shared/NotAdmin';
 import NotFound from './pages/shared/NotFound';
@@ -113,6 +114,7 @@ function App() {
         <Route path='/register' element={<Register />}></Route>
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }
