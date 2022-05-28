@@ -38,16 +38,7 @@ function App() {
     .then(res => res.json())
     , { enabled: isTrue }
   )
-  // if (!userDat.isSuccess) {
-  //   userDat.refetch()
-  // }
 
-  // if (loading || userDat.isLoading) {
-  //   return <LoadSpinner></LoadSpinner>
-  // }
-
-
-  // console.log(userDat);
   return (
     <div className="App">
       <NavBar></NavBar>

@@ -3,15 +3,12 @@ import { Link, Outlet } from 'react-router-dom';
 import LoadSpinner from '../shared/LoadSpinner';
 
 const Dashboard = ({ userData }) => {
-    // console.log(userData);
 
-    // const { userDat } = props;
     if (userData?.isLoading) {
         return <div className='h-screen flex justify-center items-center'>
             <LoadSpinner></LoadSpinner>
         </div>
     }
-    // console.log(userData.data);
     return (
         <div className="drawer drawer-mobile border-2">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
