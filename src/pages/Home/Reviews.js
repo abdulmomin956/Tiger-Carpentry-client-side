@@ -16,6 +16,7 @@ const Reviews = () => {
             {
                 reviews.data.map((review, index) => <div key={index} className="card w-96 bg-base-100 shadow-xl">
                     <div className="card-body">
+                        <h2 className='card-title'>{review.name}</h2>
                         <p>{review.short}</p>
                         <h2 className="card-title text-yellow-500">{review.rating} STAR</h2>
                         <div className="card-actions justify-end">

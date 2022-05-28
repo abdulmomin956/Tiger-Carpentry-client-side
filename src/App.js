@@ -83,7 +83,7 @@ function App() {
               <AddReview user={user}></AddReview>
             </NotAdmin>
           }></Route>
-          <Route path='/dashboard/my-profile' element={<MyProfile />}></Route>
+          <Route path='/dashboard/my-profile' element={<MyProfile user={user} />}></Route>
           {
             userDat?.data?.role === 'admin' && <Route path='/dashboard/' element={
               <RequireAdmin userDat={userDat} fireDat={loading}>
