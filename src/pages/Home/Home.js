@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import Banner from './Banner';
+import Reviews from './Reviews';
 import Tools from './Tools';
 
 
@@ -23,6 +24,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+            <Reviews></Reviews>
 
         </main>
     );
