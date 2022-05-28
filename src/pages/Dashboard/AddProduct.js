@@ -25,7 +25,7 @@ const AddProduct = () => {
                         image: img
 
                     }
-                    fetch('http://localhost:5000/products', {
+                    fetch('https://secure-harbor-92010.herokuapp.com/products', {
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json',

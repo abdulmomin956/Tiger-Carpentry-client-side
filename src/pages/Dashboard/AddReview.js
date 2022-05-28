@@ -14,7 +14,7 @@ const AddReview = ({ user }) => {
             name: user.displayName
         }
 
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://secure-harbor-92010.herokuapp.com/reviews', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

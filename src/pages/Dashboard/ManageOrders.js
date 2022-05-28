@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import LoadSpinner from '../shared/LoadSpinner';
 
 const ManageOrders = () => {
-    const allOrders = useQuery('allOrder', () => fetch('http://localhost:5000/all-orders', {
+    const allOrders = useQuery('allOrder', () => fetch('https://secure-harbor-92010.herokuapp.com/all-orders', {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -19,7 +19,7 @@ const ManageOrders = () => {
     // console.log(allOrders);
 
     const handleShipping = id => {
-        fetch(`http://localhost:5000/all-orders/${id}`, {
+        fetch(`https://secure-harbor-92010.herokuapp.com/all-orders/${id}`, {
             method: "PATCH",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

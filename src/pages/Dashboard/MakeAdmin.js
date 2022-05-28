@@ -6,7 +6,7 @@ import RequireAdmin from '../shared/RequireAdmin';
 
 const MakeAdmin = () => {
     const { isLoading, error, data, refetch } = useQuery('users', () =>
-        fetch('http://localhost:5000/users', {
+        fetch('https://secure-harbor-92010.herokuapp.com/users', {
             method: "GET",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -20,7 +20,7 @@ const MakeAdmin = () => {
     </div>
 
     const handleAdmin = email => {
-        fetch(`http://localhost:5000/users/${email}`, {
+        fetch(`https://secure-harbor-92010.herokuapp.com/users/${email}`, {
             method: 'PATCH'
         })
             .then(res => res.json())

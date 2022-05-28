@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import LoadSpinner from '../shared/LoadSpinner';
 
 const Reviews = () => {
-    const reviews = useQuery('reviews', () => fetch('http://localhost:5000/reviews').then(res => res.json()))
+    const reviews = useQuery('reviews', () => fetch('https://secure-harbor-92010.herokuapp.com/reviews').then(res => res.json()))
     // console.log(reviews);
     // const { name, short, rating } = reviews.data
     if (reviews.isLoading) {

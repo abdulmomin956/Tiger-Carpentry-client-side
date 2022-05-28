@@ -11,7 +11,7 @@ const stripePromise = loadStripe('pk_test_51L3fuvHSxiZtopDfjlCU7k042fqPyTli9P61z
 
 const Payment = ({ user }) => {
     const { id } = useParams();
-    const order = useQuery('order', () => fetch(`http://localhost:5000/orders/search/${id}`, {
+    const order = useQuery('order', () => fetch(`https://secure-harbor-92010.herokuapp.com/orders/search/${id}`, {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

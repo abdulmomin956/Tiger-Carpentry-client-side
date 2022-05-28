@@ -6,7 +6,7 @@ import Tools from './Tools';
 
 
 const Home = () => {
-    const productData = useQuery('products', () => fetch('http://localhost:5000/products')
+    const productData = useQuery('products', () => fetch('https://secure-harbor-92010.herokuapp.com/products')
         .then(res => res.json()))
     const allProducts = productData.data;
     return (

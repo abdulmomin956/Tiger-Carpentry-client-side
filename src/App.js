@@ -34,7 +34,7 @@ function App() {
   const [user, loading, error] = useAuthState(auth);
   const isTrue = !!user;
 
-  const userDat = useQuery(['users', user?.email], () => fetch(`http://localhost:5000/users/${user?.email}`)
+  const userDat = useQuery(['users', user?.email], () => fetch(`https://secure-harbor-92010.herokuapp.com/users/${user?.email}`)
     .then(res => res.json())
     , { enabled: isTrue }
   )

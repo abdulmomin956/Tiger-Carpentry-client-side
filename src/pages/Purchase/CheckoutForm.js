@@ -11,7 +11,7 @@ const CheckoutForm = ({ name, email, rate, orderQty, id }) => {
 
     const totalAmount = rate * orderQty;
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://secure-harbor-92010.herokuapp.com/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const CheckoutForm = ({ name, email, rate, orderQty, id }) => {
         }
     };
     if (success) {
-        fetch(`http://localhost:5000/order/transaction/${id}`, {
+        fetch(`https://secure-harbor-92010.herokuapp.com/order/transaction/${id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",

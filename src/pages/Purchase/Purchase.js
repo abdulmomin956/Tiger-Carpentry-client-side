@@ -9,7 +9,7 @@ const Purchase = ({ user }) => {
     const { register, handleSubmit, reset } = useForm();
     const { id } = useParams();
     // console.log(id);
-    const singlePrData = useQuery('singleProduct', () => fetch(`http://localhost:5000/products/${id}`)
+    const singlePrData = useQuery('singleProduct', () => fetch(`https://secure-harbor-92010.herokuapp.com/products/${id}`)
         .then(res => res.json())
     )
     let navigate = useNavigate();
@@ -36,7 +36,7 @@ const Purchase = ({ user }) => {
             phone: data.phone
         }
         console.log(order);
-        fetch('http://localhost:5000/orders', {
+        fetch('https://secure-harbor-92010.herokuapp.com/orders', {
             method: "POST",
             headers: {
                 "content-type": "application/json",
