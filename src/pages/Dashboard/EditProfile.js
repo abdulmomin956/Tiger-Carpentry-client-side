@@ -25,68 +25,68 @@ const EditProfile = ({ user }) => {
     //     .then(res => res.json())
     //     .then(result => console.log(result))
 
-}
-return (
-    <form onSubmit={handleSubmit(onSubmit)} className="col-md-8 col-lg-9 pl-md-5 pb-5 pt-3 w-1/2 mx-auto">
-        <div className="form-group">
-            <label htmlFor="FullName">Full name <span className="text-secondary">(Name cannot be changed)</span></label>
-            <div>
-                <input type="text" name="fullName" className="form-control input input-bordered" disabled defaultValue={user.displayName} />
-            </div>
-        </div>
-        <div className="form-group">
-            <label htmlFor="email">Email Address <span className="text-secondary">(Email Address cannot be changed)</span>
-            </label>
-            <input type="text" disabled className="form-control input input-bordered" defaultValue={user.email} />
-        </div>
-        <div className="form-group">
-            <label >Phone</label>
-            <input {...register("mobile")} type="text" name="phone" className="form-control input input-bordered" defaultValue={userDetail?.mobile} />
-        </div>
 
-        <div className='form-group'>
-            <h1 className='text-3xl'>Address</h1>
+    return (
+        <form onSubmit={handleSubmit(onSubmit)} className="col-md-8 col-lg-9 pl-md-5 pb-5 pt-3 w-1/2 mx-auto">
             <div className="form-group">
-                <label > Full Address</label>
+                <label htmlFor="FullName">Full name <span className="text-secondary">(Name cannot be changed)</span></label>
                 <div>
-                    <input {...register("address")} type="text" name="fullName" className="form-control input input-bordered" placeholder='Full Address' defaultValue={userDetail?.address} />
+                    <input type="text" name="fullName" className="form-control input input-bordered" disabled defaultValue={user.displayName} />
                 </div>
+            </div>
+            <div className="form-group">
+                <label htmlFor="email">Email Address <span className="text-secondary">(Email Address cannot be changed)</span>
+                </label>
+                <input type="text" disabled className="form-control input input-bordered" defaultValue={user.email} />
+            </div>
+            <div className="form-group">
+                <label >Phone</label>
+                <input {...register("mobile")} type="text" name="phone" className="form-control input input-bordered" defaultValue={userDetail?.mobile} />
             </div>
 
-        </div>
-        <div className='form-group'>
-            <h1 className='text-3xl'>Education</h1>
-            <div className="form-group">
-                <label >Education Level</label>
-                <div>
-                    <input {...register("level")} type="text" className="form-control input input-bordered" placeholder='level' defaultValue={userDetail?.level} />
+            <div className='form-group'>
+                <h1 className='text-3xl'>Address</h1>
+                <div className="form-group">
+                    <label > Full Address</label>
+                    <div>
+                        <input {...register("address")} type="text" name="fullName" className="form-control input input-bordered" placeholder='Full Address' defaultValue={userDetail?.address} />
+                    </div>
                 </div>
+
             </div>
-            <div className="form-group">
-                <label >Degree Title</label>
-                <div>
-                    <input {...register("degree")} type="text" className="form-control input input-bordered" placeholder='degree' defaultValue={userDetail?.degree} />
+            <div className='form-group'>
+                <h1 className='text-3xl'>Education</h1>
+                <div className="form-group">
+                    <label >Education Level</label>
+                    <div>
+                        <input {...register("level")} type="text" className="form-control input input-bordered" placeholder='level' defaultValue={userDetail?.level} />
+                    </div>
                 </div>
-            </div>
-            <div className="form-group">
-                <label >Institute</label>
-                <div>
-                    <input {...register("institute")} type="text" className="form-control input input-bordered" placeholder='Institute' defaultValue={userDetail?.institute} />
+                <div className="form-group">
+                    <label >Degree Title</label>
+                    <div>
+                        <input {...register("degree")} type="text" className="form-control input input-bordered" placeholder='degree' defaultValue={userDetail?.degree} />
+                    </div>
                 </div>
-            </div>
-            <div className="form-group">
-                <label >Year</label>
-                <div>
-                    <input {...register("year")} type="text" className="form-control input input-bordered" placeholder='year' defaultValue={userDetail?.year} />
+                <div className="form-group">
+                    <label >Institute</label>
+                    <div>
+                        <input {...register("institute")} type="text" className="form-control input input-bordered" placeholder='Institute' defaultValue={userDetail?.institute} />
+                    </div>
                 </div>
-            </div>
-            <div className="form-group text-right"><button className="btn btn-rounded" disabled="">Save changes</button>
+                <div className="form-group">
+                    <label >Year</label>
+                    <div>
+                        <input {...register("year")} type="text" className="form-control input input-bordered" placeholder='year' defaultValue={userDetail?.year} />
+                    </div>
+                </div>
+                <div className="form-group text-right"><button className="btn btn-rounded" disabled="">Save changes</button>
+                </div>
+
             </div>
 
-        </div>
-
-    </form>
-);
+        </form>
+    );
 };
 
 export default EditProfile;
