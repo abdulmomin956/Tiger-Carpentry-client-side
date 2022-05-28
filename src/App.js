@@ -26,14 +26,13 @@ import NotAdmin from './pages/shared/NotAdmin';
 import NotFound from './pages/shared/NotFound';
 import RequireAdmin from './pages/shared/RequireAdmin';
 import RequireAuth from './pages/shared/RequireAuth';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 function App() {
   const [user, loading, error] = useAuthState(auth);
-  // console.log(user);
   const isTrue = !!user;
-  // console.log(isTrue);
 
   const userDat = useQuery(['users', user?.email], () => fetch(`http://localhost:5000/users/${user?.email}`)
     .then(res => res.json())
@@ -81,7 +80,7 @@ function App() {
           }
           <Route path='/dashboard/add-review' element={
             <NotAdmin userDat={userDat} fireDat={loading}>
-              <AddReview></AddReview>
+              <AddReview user={user}></AddReview>
             </NotAdmin>
           }></Route>
           <Route path='/dashboard/my-profile' element={<MyProfile />}></Route>
