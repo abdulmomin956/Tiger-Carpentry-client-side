@@ -12,7 +12,7 @@ const Home = () => {
     return (
         <main>
             <Banner></Banner>
-            <section className='hero min-h-screen bg-base-200'>
+            <section id='product' className='hero min-h-screen bg-base-200'>
                 <div className='hero-content flex-col w-full md:w-4/5'>
                     <div className="text-center lg:text-left">
                         <h1 className="text-5xl font-bold">Main Products</h1>

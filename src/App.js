@@ -27,6 +27,7 @@ import NotFound from './pages/shared/NotFound';
 import RequireAdmin from './pages/shared/RequireAdmin';
 import RequireAuth from './pages/shared/RequireAuth';
 import 'react-toastify/dist/ReactToastify.css';
+import EditProfile from './pages/Dashboard/EditProfile';
 
 
 
@@ -44,6 +45,11 @@ function App() {
       <NavBar></NavBar>
       <Routes>
         <Route path='/' element={<Home />}></Route>
+        <Route path='edit-profile' element={
+          <RequireAuth>
+            <EditProfile user={user}></EditProfile>
+          </RequireAuth>
+        }></Route>
         <Route path='/purchase-success' element={
           <RequireAuth>
             <PlacedSuccess></PlacedSuccess>

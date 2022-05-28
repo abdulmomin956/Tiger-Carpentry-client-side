@@ -12,19 +12,22 @@ const Reviews = () => {
         </div>
     }
     return (
-        <div className='bg-base-100 lg:px-32 flex  gap-5 py-10'>
-            {
-                reviews.data.map((review, index) => <div key={index} className="card w-96 bg-base-100 shadow-xl">
-                    <div className="card-body">
-                        <h2 className='card-title'>{review.name}</h2>
-                        <p>{review.short}</p>
-                        <h2 className="card-title text-yellow-500">{review.rating} STAR</h2>
-                        <div className="card-actions justify-end">
-                            <span className="">1 day ago</span>
+        <div className='w-full bg-base-100'>
+            <h1 className='text-center text-3xl font-bold'>Our Customer's Reviews</h1>
+            <div className=' lg:px-32 flex  gap-5 py-10'>
+                {
+                    reviews.data.map((review, index) => <div key={index} className="card w-96 bg-base-100 shadow-xl">
+                        <div className="card-body">
+                            <h2 className='card-title'>{review.name}</h2>
+                            <p>{review.short}</p>
+                            <h2 className="card-title text-yellow-500">{review.rating} STAR</h2>
+                            <div className="card-actions justify-end">
+                                <span className="">1 day ago</span>
+                            </div>
                         </div>
-                    </div>
-                </div>)
-            }
+                    </div>)
+                }
+            </div>
         </div>
     );
 };
