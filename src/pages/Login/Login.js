@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import React, { useEffect, useState } from 'react';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
@@ -8,13 +8,17 @@ import LoadSpinner from '../shared/LoadSpinner';
 import SocialLogin from './SocialLogin';
 
 const Login = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, getValues } = useForm();
     const [
         signInWithEmailAndPassword,
         user,
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
+    const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(
+        auth
+    );
 
     const [token] = useToken(user)
 
@@ -28,15 +32,23 @@ const Login = () => {
             navigate(from, { replace: true });
         }
     }, [from, navigate, token])
-
-    if (loading) {
-        return <LoadSpinner></LoadSpinner>
+    if (loading || sending) {
+        return <div className='h-screen flex justify-center items-center'>
+            <LoadSpinner></LoadSpinner>
+        </div>
     }
 
     const onSubmit = async data => {
+
         await signInWithEmailAndPassword(data.email, data.password);
 
     };
+
+
+    let signInError;
+    if (error || resetError) {
+        signInError = <p className='text-red-500'><small>{error?.message || resetError?.message}</small></p>
+    }
 
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -67,9 +79,16 @@ const Login = () => {
                             </label>
                             <input {...register("password")} type="password" placeholder="password" className="input input-bordered" />
                             <label className="label">
-                                <a href="#" className="text-primary link link-hover">Forgot password?</a>
+                                <button type='button' onClick={async () => {
+                                    const values = getValues('email');
+                                    await sendPasswordResetEmail(values);
+                                    alert('Sent email');
+                                }} className="text-primary  link-hover">Forgot password?</button>
                             </label>
                         </div>
+                        {
+                            signInError
+                        }
                         <div className="form-control mt-6">
                             <button type='submit' className="btn btn-primary">Login</button>
                         </div>

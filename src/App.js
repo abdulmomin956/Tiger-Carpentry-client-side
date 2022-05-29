@@ -28,6 +28,7 @@ import RequireAdmin from './pages/shared/RequireAdmin';
 import RequireAuth from './pages/shared/RequireAuth';
 import 'react-toastify/dist/ReactToastify.css';
 import EditProfile from './pages/Dashboard/EditProfile';
+import LoadSpinner from './pages/shared/LoadSpinner';
 
 
 
@@ -40,6 +41,12 @@ function App() {
     , { enabled: isTrue }
   )
 
+  if (loading) {
+    return <div className='h-screen flex justify-center items-center'>
+      <LoadSpinner></LoadSpinner>
+    </div>
+  }
+
   return (
     <div className="App">
       <NavBar></NavBar>
@@ -47,7 +54,7 @@ function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='edit-profile' element={
           <RequireAuth>
-            <EditProfile user={user}></EditProfile>
+            <EditProfile user={user} isTrue={isTrue}></EditProfile>
           </RequireAuth>
         }></Route>
         <Route path='/purchase-success' element={
