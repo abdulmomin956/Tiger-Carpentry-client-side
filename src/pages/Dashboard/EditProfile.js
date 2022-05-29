@@ -9,7 +9,7 @@ const EditProfile = ({ user, isTrue }) => {
     const { register, handleSubmit } = useForm();
     // console.log(isTrue);
     // console.log(user.email);
-    const userDetail = useQuery(['userDetail', user?.email], () => fetch(`http://localhost:5000/userDetail/${user.email}`, {
+    const userDetail = useQuery(['userDetail', user?.email], () => fetch(`https://secure-harbor-92010.herokuapp.com/userDetail/${user.email}`, {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -36,7 +36,7 @@ const EditProfile = ({ user, isTrue }) => {
         }
 
         // console.log(detail);
-        fetch(`http://localhost:5000/userDetail/${user.email}`, {
+        fetch(`https://secure-harbor-92010.herokuapp.com/userDetail/${user.email}`, {
             method: 'PUT',
             headers: {
                 "content-type": "application/json",

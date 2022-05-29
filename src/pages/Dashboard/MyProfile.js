@@ -5,7 +5,7 @@ import LoadSpinner from '../shared/LoadSpinner';
 
 const MyProfile = ({ user }) => {
     const navigate = useNavigate()
-    const userDetail = useQuery(['userDetail', user?.email], () => fetch(`http://localhost:5000/userDetail/${user.email}`, {
+    const userDetail = useQuery(['userDetail', user?.email], () => fetch(`https://secure-harbor-92010.herokuapp.com/userDetail/${user.email}`, {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
