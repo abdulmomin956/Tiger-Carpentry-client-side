@@ -7,8 +7,8 @@ const Banner = () => {
 
             <div className="hero-content text-center lg:text-left text-neutral-content">
                 <div className="max-w-md">
-                    <h1 className="mb-5 text-5xl font-bold text-white">Hello there</h1>
-                    <p className="mb-5 text-white">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                    <h1 className="mb-5 text-5xl font-bold text-white">Welcome to TIGER CARPENTRY</h1>
+                    <p className="mb-5 text-white">We offer quality wood working and metal working tools. Our products are designed to give you years of service and make your next project easier and faster than you can do it without them.</p>
                     <a href='#product' className="btn btn-primary">Our Products</a>
                 </div>
             </div>
