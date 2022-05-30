@@ -7,8 +7,6 @@ import LoadSpinner from '../shared/LoadSpinner';
 const EditProfile = ({ user, isTrue }) => {
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
-    // console.log(isTrue);
-    // console.log(user.email);
     const userDetail = useQuery(['userDetail', user?.email], () => fetch(`https://secure-harbor-92010.herokuapp.com/userDetail/${user.email}`, {
         method: 'GET',
         headers: {
@@ -35,7 +33,6 @@ const EditProfile = ({ user, isTrue }) => {
             address: data.address
         }
 
-        // console.log(detail);
         fetch(`https://secure-harbor-92010.herokuapp.com/userDetail/${user.email}`, {
             method: 'PUT',
             headers: {

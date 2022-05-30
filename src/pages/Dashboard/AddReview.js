@@ -5,7 +5,6 @@ import { toast, ToastContainer } from 'react-toastify';
 
 const AddReview = ({ user }) => {
     const { register, handleSubmit, reset } = useForm();
-    // console.log(user);
     const onSubmit = async data => {
         console.log(data);
         const review = {
@@ -24,7 +23,6 @@ const AddReview = ({ user }) => {
         })
             .then(res => res.json())
             .then(result => {
-                // console.log(result)
                 if (result.acknowledged) {
                     toast.success('You have posted a review!', {
                         position: "top-center",

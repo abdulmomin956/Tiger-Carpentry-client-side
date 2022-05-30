@@ -8,20 +8,20 @@ import PlacedSuccess from './PlacedSuccess';
 const Purchase = ({ user, userDat }) => {
     const { register, handleSubmit, reset } = useForm();
     const { id } = useParams();
-    // console.log(id);
+
     const singlePrData = useQuery('singleProduct', () => fetch(`https://secure-harbor-92010.herokuapp.com/products/${id}`)
         .then(res => res.json())
     )
-    // let navigate = useNavigate();
+
     const [success, setSuccess] = useState(false);
 
     if (singlePrData.isLoading) {
         return <LoadSpinner></LoadSpinner>
     }
 
-    // console.log(singlePrData);
+
     const { name, short, price, minOrder, availableQty, image } = singlePrData.data;
-    // console.log(user.displayName);
+
 
 
     const onSubmit = async data => {
@@ -35,7 +35,7 @@ const Purchase = ({ user, userDat }) => {
             address: data.address,
             phone: data.phone
         }
-        // console.log(order);
+
         fetch('https://secure-harbor-92010.herokuapp.com/orders', {
             method: "POST",
             headers: {
@@ -46,10 +46,10 @@ const Purchase = ({ user, userDat }) => {
         })
             .then(res => res.json())
             .then(result => {
-                // console.log(result)
+
                 if (result.acknowledged) {
                     const upQty = { availableQty: availableQty - data.orderQty }
-                    fetch(`http://localhost:5000/products/${id}`, {
+                    fetch(`https://secure-harbor-92010.herokuapp.com/products/${id}`, {
                         method: "PATCH",
                         headers: {
                             "content-type": "application/json",
@@ -59,7 +59,7 @@ const Purchase = ({ user, userDat }) => {
                     })
                         .then(res => res.json())
                         .then(result => {
-                            // console.log(result);
+
                             if (result.acknowledged) {
                                 reset();
                                 setSuccess(true);

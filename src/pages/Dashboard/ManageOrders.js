@@ -16,7 +16,7 @@ const ManageOrders = () => {
         </div>
     }
 
-    // console.log(allOrders);
+
 
     const handleShipping = id => {
         fetch(`https://secure-harbor-92010.herokuapp.com/all-orders/${id}`, {
@@ -27,8 +27,10 @@ const ManageOrders = () => {
         })
             .then(res => res.json())
             .then(result => {
-                // console.log(result)
-                allOrders.refetch();
+                if (result?.acknowledged) {
+                    allOrders.refetch();
+                }
+
             })
     }
 

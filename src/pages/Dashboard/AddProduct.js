@@ -47,8 +47,7 @@ const AddProduct = () => {
             })
 
 
-        // console.log(data.image[0].name);
-        //mongodb post
+
 
     };
     return (

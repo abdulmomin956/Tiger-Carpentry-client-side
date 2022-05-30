@@ -1,8 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import LoadSpinner from '../shared/LoadSpinner';
-import NotFound from '../shared/NotFound';
-import RequireAdmin from '../shared/RequireAdmin';
 
 const MakeAdmin = () => {
     const { isLoading, error, data, refetch } = useQuery('users', () =>
@@ -21,12 +19,30 @@ const MakeAdmin = () => {
 
     const handleAdmin = email => {
         fetch(`https://secure-harbor-92010.herokuapp.com/users/${email}`, {
-            method: 'PATCH'
+            method: 'PATCH',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
         })
             .then(res => res.json())
             .then(result => {
                 refetch()
                 console.log(result)
+            })
+    }
+
+    const handleDelete = email => {
+        fetch(`https://secure-harbor-92010.herokuapp.com/users/${email}`, {
+            method: "DELETE",
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.acknowledged) {
+                    refetch();
+                }
             })
     }
 
@@ -51,7 +67,7 @@ const MakeAdmin = () => {
                                 <td>{
                                     !user.role && <button onClick={() => handleAdmin(user.email)} className='btn btn-primary'>Make Admin</button>
                                 }</td>
-                                <td><button className='btn btn-primary'>Delete</button></td>
+                                <td><button onClick={() => handleDelete(user.email)} className='btn btn-primary'>Delete</button></td>
                             </tr>
                         )
                     }

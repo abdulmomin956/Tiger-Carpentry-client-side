@@ -28,6 +28,7 @@ const MyOrders = ({ user }) => {
             .then(res => res.json())
             .then(result => {
                 console.log(result)
+
                 myOrders.refetch();
             })
     }

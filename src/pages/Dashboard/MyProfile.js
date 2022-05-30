@@ -17,7 +17,7 @@ const MyProfile = ({ user }) => {
             <LoadSpinner></LoadSpinner>
         </div>
     }
-    // console.log(userDetail);
+
     return (
         <div className='   min-h-screen'>
             <div className="  w-full  "><div className=" lg:text-left">

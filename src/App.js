@@ -47,7 +47,7 @@ function App() {
     </div>
   }
 
-  // console.log(userDat);
+
 
   return (
     <div className="App">

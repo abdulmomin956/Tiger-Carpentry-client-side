@@ -24,7 +24,11 @@ const ManageProducts = () => {
             }
         })
             .then(res => res.json())
-            .then(result => allProducts.refetch())
+            .then(result => {
+                if (result.acknowledged) {
+                    allProducts.refetch()
+                }
+            })
     }
 
     return (
