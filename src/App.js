@@ -41,11 +41,13 @@ function App() {
     , { enabled: isTrue }
   )
 
-  if (loading) {
+  if (loading || userDat.isLoading) {
     return <div className='h-screen flex justify-center items-center'>
       <LoadSpinner></LoadSpinner>
     </div>
   }
+
+  // console.log(userDat);
 
   return (
     <div className="App">
@@ -69,7 +71,7 @@ function App() {
         }></Route>
         <Route path='/purchase/:id' element={
           <RequireAuth>
-            <Purchase user={user} />
+            <Purchase user={user} userDat={userDat} />
           </RequireAuth>
         }></Route>
         <Route path='/dashboard' element={

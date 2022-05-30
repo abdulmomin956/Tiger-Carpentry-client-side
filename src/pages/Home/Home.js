@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import Banner from './Banner';
+import News from './News';
 import Reviews from './Reviews';
 import Tools from './Tools';
 
@@ -60,6 +61,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+            <News></News>
             <Reviews></Reviews>
 
         </main>

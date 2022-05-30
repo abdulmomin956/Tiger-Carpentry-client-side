@@ -5,14 +5,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import LoadSpinner from '../shared/LoadSpinner';
 import PlacedSuccess from './PlacedSuccess';
 
-const Purchase = ({ user }) => {
+const Purchase = ({ user, userDat }) => {
     const { register, handleSubmit, reset } = useForm();
     const { id } = useParams();
     // console.log(id);
     const singlePrData = useQuery('singleProduct', () => fetch(`https://secure-harbor-92010.herokuapp.com/products/${id}`)
         .then(res => res.json())
     )
-    let navigate = useNavigate();
+    // let navigate = useNavigate();
     const [success, setSuccess] = useState(false);
 
     if (singlePrData.isLoading) {
@@ -35,7 +35,7 @@ const Purchase = ({ user }) => {
             address: data.address,
             phone: data.phone
         }
-        console.log(order);
+        // console.log(order);
         fetch('https://secure-harbor-92010.herokuapp.com/orders', {
             method: "POST",
             headers: {
@@ -46,10 +46,27 @@ const Purchase = ({ user }) => {
         })
             .then(res => res.json())
             .then(result => {
-                console.log(result)
+                // console.log(result)
                 if (result.acknowledged) {
-                    reset();
-                    setSuccess(true);
+                    const upQty = { availableQty: availableQty - data.orderQty }
+                    fetch(`http://localhost:5000/products/${id}`, {
+                        method: "PATCH",
+                        headers: {
+                            "content-type": "application/json",
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        },
+                        body: JSON.stringify(upQty)
+                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            // console.log(result);
+                            if (result.acknowledged) {
+                                reset();
+                                setSuccess(true);
+                            }
+
+                        })
+
                 }
             })
     };
@@ -108,7 +125,7 @@ const Purchase = ({ user }) => {
                             <input {...register("phone")} type="text" required placeholder='Phone Number' className="input input-bordered" />
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Place the Order</button>
+                            <button disabled={userDat?.data?.role} className="btn btn-primary">{userDat?.data?.role ? "You are an admin" : 'Place the Order'}</button>
                         </div>
                     </form>
                 </div>
