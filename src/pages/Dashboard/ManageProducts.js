@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import LoadSpinner from '../shared/LoadSpinner';
 
 const ManageProducts = () => {
-    const allProducts = useQuery('allOrder', () => fetch('https://secure-harbor-92010.herokuapp.com/all-products', {
+    const allProducts = useQuery('allOrder', () => fetch('https://tiger-carpentry-server-side-production.up.railway.app/all-products', {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -17,7 +17,7 @@ const ManageProducts = () => {
     }
 
     const handleDelete = id => {
-        fetch(`https://secure-harbor-92010.herokuapp.com/all-products/${id}`, {
+        fetch(`https://tiger-carpentry-server-side-production.up.railway.app/all-products/${id}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import LoadSpinner from '../shared/LoadSpinner';
 
 const Reviews = () => {
-    const reviews = useQuery('reviews', () => fetch('https://secure-harbor-92010.herokuapp.com/reviews').then(res => res.json()))
+    const reviews = useQuery('reviews', () => fetch('https://tiger-carpentry-server-side-production.up.railway.app/reviews').then(res => res.json()))
 
     if (reviews.isLoading) {
         return <div className='h-screen flex justify-center items-center'>

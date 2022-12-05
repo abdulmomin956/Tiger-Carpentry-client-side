@@ -13,7 +13,7 @@ const AddReview = ({ user }) => {
             name: user.displayName
         }
 
-        fetch('https://secure-harbor-92010.herokuapp.com/reviews', {
+        fetch('https://tiger-carpentry-server-side-production.up.railway.app/reviews', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

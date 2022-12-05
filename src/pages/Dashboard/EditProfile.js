@@ -4,10 +4,10 @@ import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import LoadSpinner from '../shared/LoadSpinner';
 
-const EditProfile = ({ user, isTrue }) => {
+const EditProfile = ({ user }) => {
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
-    const userDetail = useQuery(['userDetail', user?.email], () => fetch(`https://secure-harbor-92010.herokuapp.com/userDetail/${user.email}`, {
+    const userDetail = useQuery(['userDetail', user?.email], () => fetch(`https://tiger-carpentry-server-side-production.up.railway.app/userDetail/${user.email}`, {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -33,7 +33,7 @@ const EditProfile = ({ user, isTrue }) => {
             address: data.address
         }
 
-        fetch(`https://secure-harbor-92010.herokuapp.com/userDetail/${user.email}`, {
+        fetch(`https://tiger-carpentry-server-side-production.up.railway.app/userDetail/${user.email}`, {
             method: 'PUT',
             headers: {
                 "content-type": "application/json",

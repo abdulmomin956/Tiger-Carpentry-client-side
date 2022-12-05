@@ -9,7 +9,7 @@ const Purchase = ({ user, userDat }) => {
     const { register, handleSubmit, reset } = useForm();
     const { id } = useParams();
 
-    const singlePrData = useQuery('singleProduct', () => fetch(`https://secure-harbor-92010.herokuapp.com/products/${id}`)
+    const singlePrData = useQuery('singleProduct', () => fetch(`https://tiger-carpentry-server-side-production.up.railway.app/products/${id}`)
         .then(res => res.json())
     )
 
@@ -36,7 +36,7 @@ const Purchase = ({ user, userDat }) => {
             phone: data.phone
         }
 
-        fetch('https://secure-harbor-92010.herokuapp.com/orders', {
+        fetch('https://tiger-carpentry-server-side-production.up.railway.app/orders', {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -49,7 +49,7 @@ const Purchase = ({ user, userDat }) => {
 
                 if (result.acknowledged) {
                     const upQty = { availableQty: availableQty - data.orderQty }
-                    fetch(`https://secure-harbor-92010.herokuapp.com/products/${id}`, {
+                    fetch(`https://tiger-carpentry-server-side-production.up.railway.app/products/${id}`, {
                         method: "PATCH",
                         headers: {
                             "content-type": "application/json",

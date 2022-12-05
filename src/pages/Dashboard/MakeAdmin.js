@@ -4,7 +4,7 @@ import LoadSpinner from '../shared/LoadSpinner';
 
 const MakeAdmin = () => {
     const { isLoading, error, data, refetch } = useQuery('users', () =>
-        fetch('https://secure-harbor-92010.herokuapp.com/users', {
+        fetch('https://tiger-carpentry-server-side-production.up.railway.app/users', {
             method: "GET",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -18,7 +18,7 @@ const MakeAdmin = () => {
     </div>
 
     const handleAdmin = email => {
-        fetch(`https://secure-harbor-92010.herokuapp.com/users/${email}`, {
+        fetch(`https://tiger-carpentry-server-side-production.up.railway.app/users/${email}`, {
             method: 'PATCH',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -32,7 +32,7 @@ const MakeAdmin = () => {
     }
 
     const handleDelete = email => {
-        fetch(`https://secure-harbor-92010.herokuapp.com/users/${email}`, {
+        fetch(`https://tiger-carpentry-server-side-production.up.railway.app/users/${email}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

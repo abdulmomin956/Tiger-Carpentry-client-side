@@ -1,4 +1,3 @@
-import { getAdditionalUserInfo } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
@@ -36,7 +35,7 @@ function App() {
   const [user, loading, error] = useAuthState(auth);
   const isTrue = !!user;
 
-  const userDat = useQuery(['users', user?.email], () => fetch(`https://secure-harbor-92010.herokuapp.com/users/${user?.email}`)
+  const userDat = useQuery(['users', user?.email], () => fetch(`https://tiger-carpentry-server-side-production.up.railway.app/users/${user?.email}`)
     .then(res => res.json())
     , { enabled: isTrue }
   )

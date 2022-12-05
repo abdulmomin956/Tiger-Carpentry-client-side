@@ -5,7 +5,7 @@ import LoadSpinner from '../shared/LoadSpinner';
 
 const MyOrders = ({ user }) => {
     console.log(user);
-    const myOrders = useQuery('myOrder', () => fetch(`https://secure-harbor-92010.herokuapp.com/orders/${user.email}`, {
+    const myOrders = useQuery('myOrder', () => fetch(`https://tiger-carpentry-server-side-production.up.railway.app/orders/${user.email}`, {
         method: "GET",
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -19,7 +19,7 @@ const MyOrders = ({ user }) => {
     }
 
     const handleCancel = id => {
-        fetch(`https://secure-harbor-92010.herokuapp.com/orders/${id}`, {
+        fetch(`https://tiger-carpentry-server-side-production.up.railway.app/orders/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

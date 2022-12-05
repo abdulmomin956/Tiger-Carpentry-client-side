@@ -25,7 +25,7 @@ const AddProduct = () => {
                         image: img
 
                     }
-                    fetch('https://secure-harbor-92010.herokuapp.com/products', {
+                    fetch('https://tiger-carpentry-server-side-production.up.railway.app/products', {
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json',
