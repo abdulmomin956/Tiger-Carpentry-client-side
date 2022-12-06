@@ -18,32 +18,8 @@ email: salman@khan.com<br>
 pass: 123456 
 <hr>
 <u>Admin credential-</u><br>
-  email: john@sina.com<br>
-  <form onsubmit="sendEmail(event)" id="myform">
-    <input type='email' name='user_email' placeholder='Your email' required> <button type="submit">Get the
-      password</button>
-  </form>
-  <hr>
+email: john@sina.com<br>
+[Get the password to your email](https://abdulmomin956.web.app/link/tiger)
 
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
-  </script>
-  <script type="text/javascript">
-    (function () {
-      emailjs.init("7UHd1JsNtmzGFUsnP");
-    })();
-  </script>
-  <script type="text/javascript">
-    function sendEmail(e) {
-      e.preventDefault();
-      var frm = document.getElementById('myform')
-      console.log('clicked');
-      emailjs.sendForm("service_c5cjb2p", 'template_b42h0bk', '#myform')
-        .then(function (response) {
-        //   console.log('SUCCESS!', response.status, response.text);
-          alert('SUCCESS!', 'Please check your email');
-          frm.reset();
-        }, function (error) {
-          console.log('FAILED...', error);
-        });
-    } 
-  </script>
+  
+  

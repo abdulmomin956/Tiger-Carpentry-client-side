@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import LoadSpinner from '../shared/LoadSpinner';
 
 const ManageOrders = () => {
-    const allOrders = useQuery('allOrder', () => fetch('http://localhost:5000/all-orders', {
+    const allOrders = useQuery('allOrder', () => fetch('https://tiger-carpentry-server-side-production.up.railway.app/all-orders', {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
