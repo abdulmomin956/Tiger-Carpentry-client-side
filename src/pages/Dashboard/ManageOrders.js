@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import LoadSpinner from '../shared/LoadSpinner';
 
 const ManageOrders = () => {
-    const allOrders = useQuery('allOrder', () => fetch('https://tiger-carpentry-server-side-production.up.railway.app/all-orders', {
+    const allOrders = useQuery('allOrder', () => fetch('http://localhost:5000/all-orders', {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -34,6 +34,8 @@ const ManageOrders = () => {
             })
     }
 
+    console.log(allOrders);
+
     return (
         <div className="overflow-x-auto w-full border">
             <div>
@@ -54,7 +56,7 @@ const ManageOrders = () => {
                 <tbody>
 
                     {
-                        allOrders.data.map((p, index) =>
+                        allOrders?.data?.map((p, index) =>
                             <tr key={index}>
                                 <th>{index + 1}</th>
                                 <td>{p.name}</td>

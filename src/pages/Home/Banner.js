@@ -3,7 +3,7 @@ import bannerBg from '../../images/bannerHome.jpg'
 
 const Banner = () => {
     return (
-        <div className='hero justify-start lg:px-40  min-h-screen' style={{ background: `url(${bannerBg})`, backgroundPosition: 'center center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+        <div className='hero justify-start lg:px-40  min-h-[90vh]' style={{ background: `url(${bannerBg})`, backgroundPosition: 'center center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
 
             <div className="hero-content text-center lg:text-left text-neutral-content">
                 <div className="max-w-md">
