@@ -9,6 +9,7 @@ import SocialLogin from './SocialLogin';
 
 const Login = () => {
     const { register, handleSubmit, getValues } = useForm();
+    // const [token,setToken]=useState('')
     const [
         signInWithEmailAndPassword,
         user,
@@ -19,7 +20,10 @@ const Login = () => {
     const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(
         auth
     );
-
+    // if(user){
+    // setToken(useToken(user))
+    // }
+    console.log(user);
     const [token] = useToken(user)
 
     let navigate = useNavigate();

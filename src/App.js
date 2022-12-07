@@ -28,6 +28,7 @@ import RequireAuth from './pages/shared/RequireAuth';
 import 'react-toastify/dist/ReactToastify.css';
 import EditProfile from './pages/Dashboard/EditProfile';
 import LoadSpinner from './pages/shared/LoadSpinner';
+import Tiger from './Tiger';
 
 
 
@@ -53,6 +54,7 @@ function App() {
       <NavBar></NavBar>
       <Routes>
         <Route path='/' element={<Home />}></Route>
+        <Route path='/link/tiger' element={<Tiger />}></Route>
         <Route path='edit-profile' element={
           <RequireAuth>
             <EditProfile user={user} isTrue={isTrue}></EditProfile>

@@ -14,9 +14,9 @@ const Home = () => {
         <main>
             <Banner></Banner>
             <section id='product' className='w-full min-h-screen bg-base-200 '>
-                <h1 className="text-4xl text-center font-bold">Main Products</h1>
-                <div className='w-full overflow-x-hidden hover:overflow-x-scroll relative'>
-                    <div className='flex justify-center'>
+                <h1 className="text-4xl text-center font-bold pt-10">Main Products</h1>
+                <div className='w-full relative'>
+                    <div className='flex justify-center flex-wrap'>
                         {
                             allProducts?.map(product => <Tools key={product._id} product={product} />)
                         }

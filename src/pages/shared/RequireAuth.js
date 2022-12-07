@@ -5,6 +5,7 @@ import auth from '../../firebase.init';
 import LoadSpinner from './LoadSpinner';
 
 const RequireAuth = ({ children }) => {
+    // const token = localStorage.getItem('accessToken')
     const [user, loading, error] = useAuthState(auth);
     let location = useLocation();
     if (loading) {
@@ -13,6 +14,7 @@ const RequireAuth = ({ children }) => {
         </div>
     }
     if (!user) {
+
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
 

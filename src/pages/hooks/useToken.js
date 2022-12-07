@@ -5,7 +5,8 @@ const useToken = user => {
     console.log(user);
     useEffect(() => {
         const email = user?.user?.email;
-        const currentUser = { email: email };
+        // console.log(email);
+        const currentUser = { email };
         if (email) {
             fetch(`https://tiger-carpentry-server-side-production.up.railway.app/users/${email}`, {
                 method: 'PUT',
@@ -16,7 +17,7 @@ const useToken = user => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     const accessToken = data.access;
                     localStorage.setItem('accessToken', accessToken);
                     setToken(accessToken);
